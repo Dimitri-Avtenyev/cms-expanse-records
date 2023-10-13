@@ -796,6 +796,7 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
       'api::episode.episode'
     >;
     metacriticRating: Attribute.Decimal;
+    image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
