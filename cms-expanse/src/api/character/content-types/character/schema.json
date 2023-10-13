@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "episodes",
+  "collectionName": "characters",
   "info": {
-    "singularName": "episode",
-    "pluralName": "episodes",
-    "displayName": "Episode",
+    "singularName": "character",
+    "pluralName": "characters",
+    "displayName": "Character",
     "description": ""
   },
   "options": {
@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "name": {
       "type": "string"
     },
     "image": {
@@ -26,22 +26,8 @@
         "audios"
       ]
     },
-    "air_date": {
-      "type": "date"
-    },
-    "synopsis": {
+    "bio": {
       "type": "text"
-    },
-    "season": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::season.season"
-    },
-    "episodeNum": {
-      "type": "integer"
-    },
-    "episodeId": {
-      "type": "string"
     }
   }
 }

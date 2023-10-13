@@ -15,10 +15,16 @@
     "title": {
       "type": "string"
     },
+    "synopsis": {
+      "type": "text"
+    },
     "episodes": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::episode.episode"
+    },
+    "metacriticRating": {
+      "type": "decimal"
     }
   }
 }

@@ -677,23 +677,62 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCharacterCharacter extends Schema.CollectionType {
+  collectionName: 'characters';
+  info: {
+    singularName: 'character';
+    pluralName: 'characters';
+    displayName: 'Character';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    image: Attribute.Media;
+    bio: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::character.character',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::character.character',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEpisodeEpisode extends Schema.CollectionType {
   collectionName: 'episodes';
   info: {
     singularName: 'episode';
     pluralName: 'episodes';
     displayName: 'Episode';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
-    content: Attribute.RichText;
-    images: Attribute.Media;
+    image: Attribute.Media;
     air_date: Attribute.Date;
     synopsis: Attribute.Text;
-    rating: Attribute.Decimal;
+    season: Attribute.Relation<
+      'api::episode.episode',
+      'oneToOne',
+      'api::season.season'
+    >;
+    episodeNum: Attribute.Integer;
+    episodeId: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -750,11 +789,13 @@ export interface ApiSeasonSeason extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
+    synopsis: Attribute.Text;
     episodes: Attribute.Relation<
       'api::season.season',
       'oneToMany',
       'api::episode.episode'
     >;
+    metacriticRating: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -789,6 +830,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::character.character': ApiCharacterCharacter;
       'api::episode.episode': ApiEpisodeEpisode;
       'api::post.post': ApiPostPost;
       'api::season.season': ApiSeasonSeason;
