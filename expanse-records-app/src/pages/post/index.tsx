@@ -7,7 +7,7 @@ interface PostInterface {
 }
 export const getStaticProps = async () => {
 
-  const response:Response = await fetch("https://cms-expanse.onrender.com/api/posts", {
+  const response:Response = await fetch(`${process.env.CMS_URL}/api/posts`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
