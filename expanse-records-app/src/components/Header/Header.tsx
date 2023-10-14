@@ -1,9 +1,15 @@
+import { LinkProps } from "next/link";
+import Dropdown from "../Dropdown/Dropdown";
 
 const Header = () => {
+  const paths:LinkProps[] = [
+   {href: "blog"}, {href: "the-expanse"}
+  ];
+
   return (
-    <div>
-      Header Component
-    </div>
+    <header>
+      <Dropdown paths={paths}/>
+    </header>
   )
 }
 

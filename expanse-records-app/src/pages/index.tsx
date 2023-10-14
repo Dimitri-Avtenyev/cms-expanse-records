@@ -1,11 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import localFont from "next/font/local";
 import styles from '@/styles/Home.module.css'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+export const protomoleculeFont = localFont({src: "../fonts/Protomolecule.woff2"})
+export const Home = () => {
   return (
     <>
       <Head>
@@ -15,13 +14,14 @@ export default function Home() {
         <meta name="author" content="Dimitri Avtenyev"/>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-         
-          <h1>The expanse</h1>
-         
+        <div>
+          <h1 className={`${protomoleculeFont.className}`}>The expanse records</h1>
+          
+          <p >Join us as we unravel the secrets of this complex and riveting world, where humanity's survival hinges on exploration, adaptation, and the eternal quest for knowledge."</p>
+   
         </div>
-      </main>
     </>
   )
 }
+
+export default Home;
