@@ -5,9 +5,9 @@ import styles from "./Layout.module.css";
 
 const Layout = ({children}:{children:ReactElement}) => {
   return (
-    <div className={styles.container}>
+    <div >
     <Header/>
-      <main>{children}</main>
+      <main className={styles.container}>{children}</main>
     <Footer/>
     </div>
       

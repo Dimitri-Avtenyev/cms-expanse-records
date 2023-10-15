@@ -1,18 +1,43 @@
 import Link from "next/link";
+import styles from "../../styles/the-expanse.module.css";
+import { Season as SeasonProps } from "@/types";
+import Season from "@/components/Season/Season";
 
-const Seasons = () => {
-  const seasons:string[] = ["s1", "s2", "s3", "s4", "s5", "s6"];
+export const getStaticProps = async () => {
+  const response: Response = await fetch(`${process.env.CMS_URL}/api/seasons?populate=*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.CMS_TOKEN}`
+    }
+  });
+  const json = await response.json();
+  const seasons: SeasonProps[] = json.data;
+  seasons.sort((a, b) => a.id - b.id);
+
+  return {
+    props: {
+      seasons: seasons
+    }
+  }
+}
+
+const Seasons = ({ seasons }: { seasons: SeasonProps[]}) => {
+
   return (
-    <div>
+    <div className={styles.container}>
       <ul>
         {
-          seasons.map((season:string, index) => {
+          seasons.map((season: SeasonProps, index: number) => {
             return (
-              <li key={season}><Link href={{pathname: "/the-expanse/[season]", query: {season: season}}}>Season {index+1}</Link></li>
+              <li key={season.id}>
+                <Link href={{ pathname: "/the-expanse/[season]", query: { season: `s${index + 1}` } }}>
+                  <Season season={season} />
+                </Link>
+              </li>
             )
           })
         }
-        
       </ul>
     </div>
   )

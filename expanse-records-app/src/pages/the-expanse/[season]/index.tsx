@@ -1,6 +1,47 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+// export const getStaticPaths = async () => {
+//   const response:Response = await fetch(`${process.env.CMS_URL}/api/seasons`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": `Bearer ${process.env.CMS_TOKEN}`
+//     }
+//   });
+//   const json = await response.json();
+//   const seasons:Season[] = json.data;
+
+//   const paths = seasons.map((season) => {
+//     return {
+//       params: {
+//         id: `s${season.id}`
+//       }
+//     }
+//   })
+//   console.log(paths);
+//   return {
+//     paths: paths,
+//     fallback: false
+//   }
+// }
+// export const getStaticProps = async ({params}: {params:{id:string}}) => {
+//   const response:Response = await fetch(`${process.env.CMS_URL}/api/season/${params.id}`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": `Bearer ${process.env.CMS_TOKEN}`
+//     }
+//   });
+//   const json = await response.json();
+//   const seasons:Season[] = json.data;
+
+//   return {
+//     props: {
+//       seasons: seasons
+//     }
+//   }
+// }
 
 const Episodes = () => {
   // demo
