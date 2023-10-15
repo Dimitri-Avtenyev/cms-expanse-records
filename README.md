@@ -4,3 +4,6 @@ This repository is for an assignment at AP Hogeschool, where we are using [Strap
 The project combines the power of Strapi for content management and Next.js for seamless frontend development.
 
 
+## Deployment 🚀
+- [cms-expanse](https://cms-expanse.onrender.com)  @render 
+- [expanse-records-app](https://#) @vercel 
