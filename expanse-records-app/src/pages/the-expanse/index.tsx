@@ -2,18 +2,31 @@ import Link from "next/link";
 import styles from "../../styles/the-expanse.module.css";
 import { Season as SeasonProps } from "@/types";
 import Season from "@/components/Season/Season";
+import { graphql } from "@/gql/index"
+import createApolloClient from "@/apollo-client";
 
+
+const GetAllSeasons = graphql(`
+query GetAllSeasons {
+  seasons {
+    title
+  }
+}
+`);
 export const getStaticProps = async () => {
-  const response: Response = await fetch(`${process.env.CMS_URL}/api/seasons?populate=*`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.CMS_TOKEN}`
-    }
-  });
-  const json = await response.json();
-  const seasons: SeasonProps[] = json.data;
-  seasons.sort((a, b) => a.id - b.id);
+  const client = createApolloClient();
+const {data} = await client.query({query: GetAllSeasons, variables: {}})
+  // const response: Response = await fetch(`${process.env.CMS_URL}/api/seasons?populate=*`, {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "Authorization": `Bearer ${process.env.CMS_TOKEN}`
+  //   }
+  // });
+  // const json = await response.json();
+  const seasons = data;
+
+  // seasons.sort((a, b) => a.id - b.id);
 
   return {
     props: {
