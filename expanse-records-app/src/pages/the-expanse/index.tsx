@@ -5,21 +5,53 @@ import Season from "@/components/Season/Season";
 import { graphql } from "@/gql/index"
 import createApolloClient from "@/apollo-client";
 
-
 const GetAllSeasons = graphql(`
 query GetAllSeasons {
   seasons {
     data {
       attributes {
-        title, synopsis
+        title
+        createdAt
+        updatedAt
+        publishedAt
+        synopsis
+        metacriticRating
+        image {
+          data {
+            id
+            attributes {
+              url
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+  episodes {
+    data {
+      id
+      attributes {
+        title
+        air_date
+        synopsis
+        createdAt
+        updatedAt
+        publishedAt
+        episodeNum
+        episodeId
       }
     }
   }
 }
+
 `);
 export const getStaticProps = async () => {
+
+  // --- GRAPHQL --- // 
   const client = createApolloClient();
-const {data} = await client.query({query: GetAllSeasons, variables: {}})
+  const { data } = await client.query({ query: GetAllSeasons, variables: {} })
+  // ---- REST --- /// 
   // const response: Response = await fetch(`${process.env.CMS_URL}/api/seasons?populate=*`, {
   //   method: "GET",
   //   headers: {
@@ -34,12 +66,12 @@ const {data} = await client.query({query: GetAllSeasons, variables: {}})
 
   return {
     props: {
-      seasons: data
+      seasons: data.seasons?.data
     }
   }
 }
 
-const Seasons = ({ seasons }: { seasons: SeasonProps[]}) => {
+const Seasons = ({ seasons }: { seasons: SeasonProps[] }) => {
 
   return (
     <div className={styles.container}>

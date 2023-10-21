@@ -6,7 +6,7 @@ const createApolloClient = () => {
     link: new HttpLink({
       // http://host.docker.internal
       
-      uri: `${process.env.CMS_URL}/graphql`,
+      uri: `http://host.docker.internal:1337/graphql`,
       headers: {
         Authorization: `Bearer ${process.env.CMS_TOKEN}`
       }
