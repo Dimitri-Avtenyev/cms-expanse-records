@@ -1,64 +1,118 @@
+import createApolloClient from "@/apollo-client";
+import { Episode as EpisodeProps } from "@/types";
+import DisplayCard from "@/components/DisplayCard/DisplayCard";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { graphql } from "@/gql/index";
 
-// export const getStaticPaths = async () => {
-//   const response:Response = await fetch(`${process.env.CMS_URL}/api/seasons`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${process.env.CMS_TOKEN}`
-//     }
-//   });
-//   const json = await response.json();
-//   const seasons:Season[] = json.data;
+const GetAllSeasonIds = graphql(`
+query GetAllSeasonIds {
+  seasons (sort:"id"){data{id}} 
+}
 
-//   const paths = seasons.map((season) => {
-//     return {
-//       params: {
-//         id: `s${season.id}`
-//       }
-//     }
-//   })
-//   console.log(paths);
-//   return {
-//     paths: paths,
-//     fallback: false
-//   }
-// }
-// export const getStaticProps = async ({params}: {params:{id:string}}) => {
-//   const response:Response = await fetch(`${process.env.CMS_URL}/api/season/${params.id}`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${process.env.CMS_TOKEN}`
-//     }
-//   });
-//   const json = await response.json();
-//   const seasons:Season[] = json.data;
+`);
+const GetAllEpisodes = graphql(`
+query GetAllEpisodes {
+  episodes(sort: "id") {
+    data {
+      id
+      attributes {
+        title
+        synopsis
+        image {
+          data {
+            id
+            attributes {
+              url
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`);
+const GetEpisodesForSeasonID = graphql(`
+query GetEpisodesForSeasonID($id: ID) {
+  season(id: $id) {
+    data {
+      attributes {
+        episodes {
+          data {
+            attributes {
+              title
+              air_date
+              synopsis
+              episodeNum
+              episodeId
+              image {
+                data {
+                  id
+                  attributes {
+                    url
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
-//   return {
-//     props: {
-//       seasons: seasons
-//     }
-//   }
-// }
+`)
+export const getStaticPaths = async () => {
+  const client = createApolloClient();
+  const { data } = await client.query({ query: GetAllSeasonIds, variables: {} });
 
-const Episodes = () => {
-  // demo
-  const seasons:string[] = ["s1", "s2", "s3", "s4", "s5", "s6"];
-  const episodes:number[] = [1, 2, 3, 4];
+  const paths = data.seasons?.data.map((season) => {
+    return {
+      params: {
+        season: `s${season.id}`
+      }
+    }
+  });
+
+  return {
+    paths: paths,
+    fallback: false
+  }
+}
+
+export const getStaticProps = async ({params}: {params:{season:string}}) => {
+  // --- GRAPHQL --- // 
+  const client = createApolloClient();
+  console.log(params.season.split("s")[1]);
+  const { data } = await client.query({ query: GetEpisodesForSeasonID, variables: {id: params.season.split("s")[1] }});
+
+  return {
+    props: {
+      episodes: data.season?.data?.attributes?.episodes?.data
+    }
+  }
+}
+
+const Episodes = ({ episodes }: { episodes: EpisodeProps[] }) => {
+
   const router = useRouter();
   return (
-    <div>
+    <div >
       <ul>
-      {
-        episodes.map((episode) => {
-          return (
-            <li><Link href={{pathname:`/the-expanse/[season]/${episode}`, query:{season: router.query.season}}}>Episode {episode}</Link></li>
-          )
-        })
-      }
-       </ul>
+        {
+          episodes.map((episode: EpisodeProps, index: number) => {
+            return (
+              <li key={index}>
+              <Link style={{color: "inherit"}} href={{ pathname: `/the-expanse/[season]/${episode}`, query: { season: router.query.season } }}>Episode {index + 1}
+                <DisplayCard episode={episode} />
+              </Link>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   );
 }

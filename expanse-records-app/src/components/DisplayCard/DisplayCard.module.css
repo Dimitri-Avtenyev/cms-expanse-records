@@ -6,6 +6,8 @@
   margin: 15px;
   width: 400px;
   text-align: center;
+  min-height: 100%;
+  overflow: auto;
 }
 .cardtitle {
   font-size: 24px;
@@ -16,12 +18,15 @@
 .card img {
   border-radius: 10px;
   margin-bottom: 15px;
+  
 }
 
 .cardcontent {
   font-size: 16px;
   text-align: left;
   text-align: justify;
+  height: 300px;
+  overflow-y: auto;
 }
 
 .card:hover {

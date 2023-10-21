@@ -25,6 +25,7 @@ interface Episode {
     publishedAt: string;
     episodeNum: number;
     episodeId: string;
+    image: Image;
   };
 }
 

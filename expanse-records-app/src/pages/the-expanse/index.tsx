@@ -1,13 +1,13 @@
 import Link from "next/link";
 import styles from "../../styles/the-expanse.module.css";
 import { Season as SeasonProps } from "@/types";
-import Season from "@/components/Season/Season";
-import { graphql } from "@/gql/index"
+import DisplayCard from "@/components/DisplayCard/DisplayCard";
+import { graphql } from "@/gql/index";
 import createApolloClient from "@/apollo-client";
 
 const GetAllSeasons = graphql(`
 query GetAllSeasons {
-  seasons {
+  seasons(sort:"id") {
     data {
       attributes {
         title
@@ -46,6 +46,7 @@ query GetAllSeasons {
 }
 
 `);
+
 export const getStaticProps = async () => {
 
   // --- GRAPHQL --- // 
@@ -60,7 +61,7 @@ export const getStaticProps = async () => {
   //   }
   // });
   // const json = await response.json();
-  //const seasons = data;
+  // const seasons = data;
 
   // seasons.sort((a, b) => a.id - b.id);
 
@@ -79,9 +80,9 @@ const Seasons = ({ seasons }: { seasons: SeasonProps[] }) => {
         {
           seasons.map((season: SeasonProps, index: number) => {
             return (
-              <li key={season.id}>
+              <li key={index}>
                 <Link href={{ pathname: "/the-expanse/[season]", query: { season: `s${index + 1}` } }}>
-                  <Season season={season} />
+                  <DisplayCard season={season} />
                 </Link>
               </li>
             )
