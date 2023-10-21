@@ -1,7 +1,8 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
  
 const config: CodegenConfig = {
-   schema: `${process.env.CMS_URL}/graphql`,
+   //http://host.docker.internal
+   schema: `https://cms-expanse.onrender.com/graphql`,
    documents: ['src/**/*.tsx'],
    generates: {
       './src/gql/': {

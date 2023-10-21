@@ -9,7 +9,11 @@ import createApolloClient from "@/apollo-client";
 const GetAllSeasons = graphql(`
 query GetAllSeasons {
   seasons {
-    title
+    data {
+      attributes {
+        title, synopsis
+      }
+    }
   }
 }
 `);
@@ -24,13 +28,13 @@ const {data} = await client.query({query: GetAllSeasons, variables: {}})
   //   }
   // });
   // const json = await response.json();
-  const seasons = data;
+  //const seasons = data;
 
   // seasons.sort((a, b) => a.id - b.id);
 
   return {
     props: {
-      seasons: seasons
+      seasons: data
     }
   }
 }
