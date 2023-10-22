@@ -20,7 +20,27 @@
   margin-bottom: 15px;
   
 }
+.score {
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.score span {
+  width: 40px; 
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(93 203 130);
+  background-color: rgb(93 203 130);
+  border-radius: 50%;
+  padding: 5px;
+  font-weight: bold;
+  color: #04090F
+}
 .cardcontent {
   font-size: 16px;
   text-align: left;

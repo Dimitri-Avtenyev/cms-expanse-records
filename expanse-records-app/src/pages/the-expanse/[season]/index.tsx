@@ -11,28 +11,6 @@ query GetAllSeasonIds {
 }
 
 `);
-const GetAllEpisodes = graphql(`
-query GetAllEpisodes {
-  episodes(sort: "id") {
-    data {
-      id
-      attributes {
-        title
-        synopsis
-        image {
-          data {
-            id
-            attributes {
-              url
-              name
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`);
 const GetEpisodesForSeasonID = graphql(`
 query GetEpisodesForSeasonID($id: ID) {
   season(id: $id) {
@@ -85,7 +63,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({params}: {params:{season:string}}) => {
   // --- GRAPHQL --- // 
   const client = createApolloClient();
-  console.log(params.season.split("s")[1]);
   const { data } = await client.query({ query: GetEpisodesForSeasonID, variables: {id: params.season.split("s")[1] }});
 
   return {
@@ -96,8 +73,8 @@ export const getStaticProps = async ({params}: {params:{season:string}}) => {
 }
 
 const Episodes = ({ episodes }: { episodes: EpisodeProps[] }) => {
-
   const router = useRouter();
+  console.log(router.query.season)
   return (
     <div >
       <ul>
@@ -105,7 +82,7 @@ const Episodes = ({ episodes }: { episodes: EpisodeProps[] }) => {
           episodes.map((episode: EpisodeProps, index: number) => {
             return (
               <li key={index}>
-              <Link style={{color: "inherit"}} href={{ pathname: `/the-expanse/[season]/${episode}`, query: { season: router.query.season } }}>Episode {index + 1}
+              <Link style={{color: "inherit"}} href={{ pathname: `/the-expanse/[season]/${episode.attributes.episodeNum}`, query: { season: router.query.season } }}>Episode {index + 1}
                 <DisplayCard episode={episode} />
               </Link>
               </li>
