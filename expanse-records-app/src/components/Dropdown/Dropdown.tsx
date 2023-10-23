@@ -21,11 +21,11 @@ const Dropdown = ({ paths }: { paths: LinkProps[] }) => {
     <div className={styles.container} >
       <button className={styles.menu} onClick={handleClick}>
         <img src="/logo.png" alt="logo"></img>
-        <span className={`${protomoleculeFont.className}`}>Menu</span>
+        <p className={`${protomoleculeFont.className}`}>Menu</p>
       </button>
-      <div className={styles.content} >
-        <ul onMouseLeave={() => {setHovered(true)}}>
-          {open &&
+      <div className={styles.content} onMouseLeave={() => {setHovered(true)}} hidden={!open} >
+        <ul >
+          {
             paths.map((path, index) => {
               let name: string = path.href.toString();
               if (path.href === "/") {

@@ -110,12 +110,10 @@ export const getStaticProps = async ({ params }: { params: { season: string, epi
 const Episode = ({ season, episode }: { season: string, episode: EpisodeProps }) => {
 
   return (
-    <div>
+    <div >
       <h1>Season {season.slice(1)} </h1>
       <h2>Episode {episode.attributes.episodeNum}</h2>
-      <p>First aired: {episode.attributes.air_date.toString()}</p>
       <DisplayCard episode={episode} />
-      
       <Link
         href={{ pathname: `/the-expanse/[season]`, query: { season: season } }}
       >

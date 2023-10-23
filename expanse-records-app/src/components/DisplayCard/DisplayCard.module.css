@@ -1,13 +1,14 @@
 .card {
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 4px rgba(245, 5, 5, 0.789);
   background-color: #4D5359;
   padding: 20px;
   margin: 15px;
-  width: 400px;
+  width: 350px;
   text-align: center;
   min-height: 100%;
   overflow: auto;
+
 }
 .cardtitle {
   font-size: 24px;
@@ -50,7 +51,7 @@
 }
 
 .card:hover {
-  transform: scale(1.02);
+  
   transition: .5s ease-in-out;
 }
 
@@ -63,13 +64,13 @@
   grid-gap: 20px;
   text-align: center;
 
-  width: auto;
+  width: 700px;
  }
  .cardtitle {
   font-size: 24px;
   font-weight: bold;
   grid-row: 1;
-  grid-column: 1 / span 2; /* Span both columns */
+  grid-column: 1 / span 2; 
 }
 .card img {
   border-radius: 10px;
