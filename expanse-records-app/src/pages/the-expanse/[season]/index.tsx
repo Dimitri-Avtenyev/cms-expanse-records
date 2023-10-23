@@ -74,7 +74,6 @@ export const getStaticProps = async ({params}: {params:{season:string}}) => {
 
 const Episodes = ({ episodes }: { episodes: EpisodeProps[] }) => {
   const router = useRouter();
-  console.log(router.query.season)
   return (
     <div >
       <ul>

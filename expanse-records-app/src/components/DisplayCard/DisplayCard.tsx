@@ -24,7 +24,7 @@ const DisplayCard = ({ season, episode }: { season?: SeasonProps, episode?: Epis
 
 
         <div className={styles.cardcontent}>
-          <p>{season.attributes.synopsis}</p>
+          <p >{season.attributes.synopsis}</p>
         </div>
       </div>
     );
@@ -39,7 +39,8 @@ const DisplayCard = ({ season, episode }: { season?: SeasonProps, episode?: Epis
           alt={episode.attributes.image.data.attributes.name}
         />
         <div className={styles.cardcontent}>
-          <p>{episode.attributes.synopsis}</p>
+        <p>{episode.attributes.air_date.toString()}</p><br/>
+        <p>{episode.attributes.synopsis}</p>
         </div>
       </div>
     );
