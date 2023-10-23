@@ -1,46 +1,73 @@
 import styles from "../../styles/the-expanse.module.css";
-interface PostInterface {
-  id:         number;
-  attributes: {
-    title:    string;
-    content:  string
+import { Post as PostProps } from "@/types";
+import { graphql } from "@/gql/index";
+import createApolloClient from "@/apollo-client";
+import DisplayCard from "@/components/DisplayCard/DisplayCard";
+import { serialize } from "next-mdx-remote/serialize";
+
+const getAllRecentPosts = graphql(`
+query GetAllPosts($limit: Int) {
+  posts(sort: "publishedAt:DESC", pagination: { limit: $limit }) {
+    data {
+      id
+      attributes {
+        title
+        content
+        publishedAt
+        image {
+          data {
+            attributes {
+              url
+              name
+            }
+          }
+        }
+      }
+    }
   }
 }
-// export const getStaticProps = async () => {
+`);
 
-//   const response:Response = await fetch(`${process.env.CMS_URL}/api/posts`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": `Bearer ${process.env.CMS_TOKEN}`
-//     }
-//   });
-//   const json = await response.json();
-//   const posts:PostInterface[] = json.data;
-  
-//   return {
-//     props: {
-//       posts: posts
-//     }
-//   }
-// }
+export const getStaticProps = async () => {
+  const client = createApolloClient();
+  const { data } = await client.query({ query: getAllRecentPosts, variables: { limit: 10 } });
 
-export const Post = ({posts}: {posts:PostInterface[]}) => {
+  let serializedPosts = await Promise.all(data.posts!.data.map(async (post) => {
+    const mdxSource = await serialize(post.attributes!.content!);
+    return {
+      id: post.id,
+      attributes: {
+        title: post.attributes?.title,
+        content: mdxSource,
+        image: post.attributes?.image
+      }
+    }
+  })
+  )
+  return {
+    props: {
+      posts: serializedPosts
+    }
+  }
+}
+
+export const BlogPage = ({ posts }: { posts: PostProps[] }) => {
+
   return (
     <div className={styles.container}>
-      <p>test</p>
-      {
-        // posts.map((post) => {
-        //   return (
-        //     <div>
-        //       <h1>{post.attributes.title}</h1>
-        //       <p>{post.attributes.content}</p>
-        //     </div>
-        //   )
-        // })
-      }
+      <ul>
+        {
+          posts.map((post) => {
+            return (
+              <li key={post.id}>
+                <DisplayCard post={post} />
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   );
 };
 
-export default Post;
+export default BlogPage;

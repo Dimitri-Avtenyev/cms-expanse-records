@@ -1,3 +1,5 @@
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
+
 interface Season {
   id: number;
   attributes: {
@@ -29,6 +31,14 @@ interface Episode {
   };
 }
 
+interface Post {
+  id: number;
+  attributes: {
+    title: string;
+    content: MDXRemoteSerializeResult;
+    image:Image
+  }
+}
 interface Image {
   data: {
     id: number;
@@ -72,5 +82,6 @@ interface Image {
 
 export type {
   Season,
-  Episode
+  Episode,
+  Post
 }

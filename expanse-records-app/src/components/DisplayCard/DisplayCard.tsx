@@ -1,10 +1,12 @@
 import { Season as SeasonProps } from "@/types";
 import { Episode as EpisodeProps } from "@/types";
+import { Post as PostProps } from "@/types";
 import styles from "./DisplayCard.module.css"
 import { protomoleculeFont } from "@/pages";
+import { MDXRemote } from "next-mdx-remote";
 
 //DisplayCard
-const DisplayCard = ({ season, episode }: { season?: SeasonProps, episode?: EpisodeProps }) => {
+const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?: EpisodeProps, post?:PostProps }) => {
 
   if (season) {
     return (
@@ -41,6 +43,22 @@ const DisplayCard = ({ season, episode }: { season?: SeasonProps, episode?: Epis
         <div className={styles.cardcontent}>
         <p>{episode.attributes.air_date.toString()}</p><br/>
         <p>{episode.attributes.synopsis}</p>
+        </div>
+      </div>
+    );
+  } else if (post) {
+    return (
+      <div className={styles.card}>
+        <h1 className={`${styles.cardtitle} ${protomoleculeFont.className}`}>
+          {post.attributes.title}
+        </h1>
+        <img
+          src={post.attributes.image.data.attributes.url}
+          alt={post.attributes.image.data.attributes.name}
+        />
+        <div className={styles.cardcontent}>
+        {/* <p>{post.attributes.content}</p> */}
+        <MDXRemote {...post.attributes.content} />
         </div>
       </div>
     );

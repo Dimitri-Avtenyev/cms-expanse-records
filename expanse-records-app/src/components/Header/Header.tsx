@@ -1,5 +1,7 @@
 import { LinkProps } from "next/link";
 import Dropdown from "../Dropdown/Dropdown";
+import styles from "./Header.module.css";
+import { protomoleculeFont } from "@/pages";
 
 const Header = () => {
   const paths:LinkProps[] = [
@@ -7,8 +9,10 @@ const Header = () => {
   ];
 
   return (
-    <header>
+    <header className={styles.navContainer}>
       <Dropdown paths={paths}/>
+      <h1 className={`${protomoleculeFont.className}`}>The expanse records</h1>
+      <div className={styles.filler}></div> 
     </header>
   )
 }

@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\nquery GetAllPosts($limit: Int) {\n  posts(sort: \"publishedAt:DESC\", pagination: { limit: $limit }) {\n    data {\n      id\n      attributes {\n        title\n        content\n        publishedAt\n        image {\n          data {\n            attributes {\n              url\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n}\n": types.GetAllPostsDocument,
     "\nquery GetEpisodeForSeasonWithEpisodeNum($id: ID, $episodeNum: Int) {\n  season(id: $id) {\n    data {\n      attributes {\n        episodes(filters: { episodeNum: { eq: $episodeNum } }) {\n          data {\n            attributes {\n              title\n              air_date\n              synopsis\n              episodeNum\n              episodeId\n              image {\n                data {\n                  id\n                  attributes {\n                    url\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n\n": types.GetEpisodeForSeasonWithEpisodeNumDocument,
     "\nquery GetSeasonsWithEpisodes  {\n  seasons(sort:\"id\") {\n    data {\n      id\n      attributes {\n        episodes {\n          data {\n            attributes {\n              title\n              air_date\n              synopsis\n              episodeNum\n              episodeId\n              image {\n                data {\n                  id\n                  attributes {\n                    url\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n": types.GetSeasonsWithEpisodesDocument,
     "\nquery GetAllSeasonIds {\n  seasons (sort:\"id\"){data{id}} \n}\n\n": types.GetAllSeasonIdsDocument,
@@ -34,6 +35,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\nquery GetAllPosts($limit: Int) {\n  posts(sort: \"publishedAt:DESC\", pagination: { limit: $limit }) {\n    data {\n      id\n      attributes {\n        title\n        content\n        publishedAt\n        image {\n          data {\n            attributes {\n              url\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetAllPosts($limit: Int) {\n  posts(sort: \"publishedAt:DESC\", pagination: { limit: $limit }) {\n    data {\n      id\n      attributes {\n        title\n        content\n        publishedAt\n        image {\n          data {\n            attributes {\n              url\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

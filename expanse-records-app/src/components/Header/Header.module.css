@@ -1,0 +1,14 @@
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+  background-color: #04090F;
+  border-bottom: dotted 0.5px #A31319;
+}
+.navContainer h1 {
+  flex-basis: 1;
+}
+.filler {
+  width: 70px;
+}
