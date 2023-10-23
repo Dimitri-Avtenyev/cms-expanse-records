@@ -3,7 +3,7 @@ import Dropdown from "../Dropdown/Dropdown";
 
 const Header = () => {
   const paths:LinkProps[] = [
-   {href: "/blog"}, {href: "/the-expanse"}
+    {href: "/"}, {href: "/blog"}, {href: "/the-expanse"}
   ];
 
   return (

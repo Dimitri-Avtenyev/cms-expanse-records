@@ -1,31 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Dropdown.module.css";
 import Link, { LinkProps } from "next/link";
 import { protomoleculeFont } from "@/pages";
 
-const Dropdown = ({paths}:{paths:LinkProps[]}) => {
+const Dropdown = ({ paths }: { paths: LinkProps[] }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [hovered, setHovered] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (!hovered) {
+      setTimeout(() => setOpen(false), 1000);
+      
+    } 
+    setHovered(false);
+  }, [hovered])
   const handleClick = () => {
     setOpen(!open);
   }
-  if (!open) {
-    return <button onClick={handleClick}>menu</button>
-  }
   return (
-    <div className={styles.container}>
-      <button onClick={handleClick}>menu</button>
-      <div className={styles.content}>
-      {
-        paths.map((path, index) => {
-          return (
-            <li key={index} className={`${protomoleculeFont.className}`}>
-              <Link href={path.href} onClick={() => setOpen(false)}>{path.href.toString()}</Link>
-            </li>
-          )
-        })
-      }
-       </div>
+    <div className={styles.container} >
+      <button className={styles.menu} onClick={handleClick}>
+        <img src="/logo.png" alt="logo"></img>
+        <span className={`${protomoleculeFont.className}`}>Menu</span>
+      </button>
+      <div className={styles.content} >
+        <ul onMouseLeave={() => {setHovered(true)}}>
+          {open &&
+            paths.map((path, index) => {
+              let name: string = path.href.toString();
+              if (path.href === "/") {
+                name = "/Home";
+              }
+              return (
+                <li key={index} className={`${protomoleculeFont.className}`}>
+                  <Link href={path.href} onClick={() => setOpen(false)}>{name}</Link>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
     </div>
   );
 }
