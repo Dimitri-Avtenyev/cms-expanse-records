@@ -12,7 +12,7 @@ const Header = () => {
     <header className={styles.navContainer}>
       <Dropdown paths={paths}/>
       <h1 className={`${protomoleculeFont.className}`}>The expanse records</h1>
-      <div className={styles.filler}></div> 
+      {/* <div className={styles.filler}></div>  */}
     </header>
   )
 }
