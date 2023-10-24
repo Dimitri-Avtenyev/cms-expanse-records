@@ -1,5 +1,14 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-
+interface Author {
+  id: number;
+  attributes: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    shortbio: string;
+  }
+  image: Image
+}
 interface Season {
   id: number;
   attributes: {
@@ -33,10 +42,21 @@ interface Episode {
 
 interface Post {
   id: number;
+  author:Author;
   attributes: {
     title: string;
+    publishedAt: string;
     content: MDXRemoteSerializeResult;
-    image:Image
+    image: Image
+  }
+}
+interface PostShort {
+  id: number;
+  author:Author;
+  attributes: {
+    title: string;
+    publishedAt: string;
+    image: Image
   }
 }
 interface Image {
@@ -81,7 +101,9 @@ interface Image {
 }
 
 export type {
+  Author,
   Season,
   Episode,
-  Post
+  Post,
+  PostShort
 }

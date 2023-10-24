@@ -1,7 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
 const createApolloClient = () => {
-  
+  // sometimes localhost does not work fix-> http://host.docker.internal
 let uri:string = process.env.NODE_ENV === "production" ?
   `${process.env.CMS_URL}/graphql` : 
   "http://host.docker.internal:1337/graphql";

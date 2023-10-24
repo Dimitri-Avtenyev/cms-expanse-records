@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "posts",
+  "collectionName": "authors",
   "info": {
-    "singularName": "post",
-    "pluralName": "posts",
-    "displayName": "Post",
+    "singularName": "author",
+    "pluralName": "authors",
+    "displayName": "Author",
     "description": ""
   },
   "options": {
@@ -12,17 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "firstname": {
       "type": "string"
     },
-    "content": {
-      "type": "richtext"
+    "lastname": {
+      "type": "string"
     },
-    "author": {
+    "email": {
+      "type": "string"
+    },
+    "shortbio": {
+      "type": "string"
+    },
+    "posts": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::author.author",
-      "inversedBy": "posts"
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "author"
     },
     "image": {
       "type": "media",

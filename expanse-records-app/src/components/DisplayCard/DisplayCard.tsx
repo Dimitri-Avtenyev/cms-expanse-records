@@ -48,15 +48,19 @@ const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?
     );
   } else if (post) {
     return (
-      <div className={styles.card}>
+      <div className={styles.cardPost}>
         <h1 className={`${styles.cardtitle} ${protomoleculeFont.className}`}>
           {post.attributes.title}
         </h1>
+        <p className={styles.cardMetaData}>
+          {/* <img src={post.author.image.data.attributes.url}></img> */}
+        {post.author.attributes.firstname} {post.author.attributes.lastname.substring(0, 1)}. | {post.attributes.publishedAt.split("T")[0]}
+        </p>
         <img
           src={post.attributes.image.data.attributes.url}
           alt={post.attributes.image.data.attributes.name}
         />
-        <div className={styles.cardcontent}>
+        <div className={styles.cardcontentPost}>
         {/* <p>{post.attributes.content}</p> */}
         <MDXRemote {...post.attributes.content} />
         </div>

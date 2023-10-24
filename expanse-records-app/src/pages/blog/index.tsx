@@ -11,6 +11,25 @@ query GetAllPosts($limit: Int) {
     data {
       id
       attributes {
+        author {
+          data {
+            id
+            attributes {
+              firstname
+              lastname
+              email
+              shortbio
+              image {
+                data {
+                  attributes {
+                    url
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
         title
         content
         publishedAt
@@ -34,10 +53,13 @@ export const getStaticProps = async () => {
 
   let serializedPosts = await Promise.all(data.posts!.data.map(async (post) => {
     const mdxSource = await serialize(post.attributes!.content!);
+    
     return {
       id: post.id,
+      author: post.attributes?.author?.data,
       attributes: {
         title: post.attributes?.title,
+        publishedAt: post.attributes?.publishedAt,
         content: mdxSource,
         image: post.attributes?.image
       }
