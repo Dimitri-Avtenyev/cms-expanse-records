@@ -8,11 +8,12 @@ const Dropdown = ({ paths }: { paths: LinkProps[] }) => {
   const [hovered, setHovered] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!hovered) {
-      setTimeout(() => setOpen(false), 1000);
-      
+    if (hovered) {
+      setTimeout(() => {
+        setOpen(false);
+        setHovered(false);
+      }, 1000);
     } 
-    setHovered(false);
   }, [hovered])
   const handleClick = () => {
     setOpen(!open);
