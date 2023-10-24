@@ -1,31 +1,53 @@
 import createApolloClient from "@/apollo-client";
 import { graphql } from "@/gql/index";
-import { PostShort as PostShortProps } from "@/types";
-import { ApolloClient } from "@apollo/client";
+import Link from "next/link";
 
+const GetAllPostsYear = graphql(`
+query GetAllPostsYear {
+  posts(sort: "publishedAt:DESC") {
+    data {
+      id
+      attributes {
+        publishedAt
+       
+      }
+    }
+  }
+}`);
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({params}:{params:{year:string}}) => {
   const client = createApolloClient();
-  //const {data} = await await client.query({ query: getAllRecentPosts, variables: { limit: 10 } });
+  const {data} = await client.query({query: GetAllPostsYear, variables: { } });
+  
+  const years:string[] = data.posts!.data.map(post => {
+    return post.attributes?.publishedAt.substring(0,4);
+  });
+const uniqueYears:string[] = years.filter((year, index) => years.indexOf(year) === index);
+
   return {
     props: {
-      posts: []
+      years: uniqueYears
     }
   }
 }
-
-const ArchivePage = ({posts}: {posts:PostShortProps[]}) => {
+const ArchivePage = ({years}:{years:string[]}) => {
   return (
-    <ul>
-     {
-      posts.map((post) => {
-        return (
-          <li>{post.attributes.title}</li>
-        )
-      })
-     }
-    </ul>
-  )
-}
+    <div>
+      <ul>
+      {
+        years.map((year, index) => {
+          return (
+            <li key={index}>
+              <Link href={{ pathname: "archive/[year]", query: { year: year } }}>
+                {year}
+              </Link>
+            </li>
+          )
+        })
+      }
+      </ul>
+    </div>
+  );
+};
 
 export default ArchivePage;

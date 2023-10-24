@@ -6,8 +6,9 @@ interface Author {
     lastname: string;
     email: string;
     shortbio: string;
+    image: Image
   }
-  image: Image
+  
 }
 interface Season {
   id: number;

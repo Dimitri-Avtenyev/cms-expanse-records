@@ -4,9 +4,10 @@ import { Post as PostProps } from "@/types";
 import styles from "./DisplayCard.module.css"
 import { protomoleculeFont } from "@/pages";
 import { MDXRemote } from "next-mdx-remote";
+import Link from "next/link";
 
 //DisplayCard
-const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?: EpisodeProps, post?:PostProps }) => {
+const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?: EpisodeProps, post?: PostProps }) => {
 
   if (season) {
     return (
@@ -41,8 +42,8 @@ const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?
           alt={episode.attributes.image.data.attributes.name}
         />
         <div className={styles.cardcontent}>
-        <p>{episode.attributes.air_date.toString()}</p><br/>
-        <p>{episode.attributes.synopsis}</p>
+          <p>{episode.attributes.air_date.toString()}</p><br />
+          <p>{episode.attributes.synopsis}</p>
         </div>
       </div>
     );
@@ -52,17 +53,21 @@ const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?
         <h1 className={`${styles.cardtitle} ${protomoleculeFont.className}`}>
           {post.attributes.title}
         </h1>
-        <p className={styles.cardMetaData}>
-          {/* <img src={post.author.image.data.attributes.url}></img> */}
-        {post.author.attributes.firstname} {post.author.attributes.lastname.substring(0, 1)}. | {post.attributes.publishedAt.split("T")[0]}
-        </p>
+        <div className={styles.cardMetaData}>
+          <div className={styles.avatarContainer}>
+            <img src={post.author.attributes.image.data.attributes.formats.thumbnail.url}></img>
+          </div>
+          <Link href={`/profile/${post.author.id}`}>
+            <p>{post.author.attributes.firstname} {post.author.attributes.lastname.substring(0, 1)}. </p>
+          </Link>| {post.attributes.publishedAt.split("T")[0]}
+        </div>
         <img
           src={post.attributes.image.data.attributes.url}
           alt={post.attributes.image.data.attributes.name}
         />
         <div className={styles.cardcontentPost}>
-        {/* <p>{post.attributes.content}</p> */}
-        <MDXRemote {...post.attributes.content} />
+          {/* <p>{post.attributes.content}</p> */}
+          <MDXRemote {...post.attributes.content} />
         </div>
       </div>
     );

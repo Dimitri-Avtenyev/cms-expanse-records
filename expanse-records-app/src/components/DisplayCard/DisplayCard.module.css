@@ -113,14 +113,35 @@
   font-size: 12px;
 }
 .cardMetaData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
   text-align: left;
-  color: rgba(255, 255, 255, 0.678)
+  color: rgba(255, 255, 255, 0.678);  
+  margin-bottom: 2px;
+}
+.avatarContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatarContainer img {
+  width: 100px;
+  height: auto;
+  top: -10px;
+}
+.cardPost .cardMetaData a {
+  color: #A31319
+}
+.cardMetaData a:hover {
+  color: inherit
 }
 .cardPost img {
   border-radius: 10px;
   width: 100%
 }
-
 .cardcontentPost {
   font-size: 16px;
   text-align: left;

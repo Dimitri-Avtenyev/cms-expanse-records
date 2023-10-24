@@ -4,9 +4,10 @@ import { graphql } from "@/gql/index";
 import createApolloClient from "@/apollo-client";
 import DisplayCard from "@/components/DisplayCard/DisplayCard";
 import { serialize } from "next-mdx-remote/serialize";
+import Link from "next/link";
 
-const getAllRecentPosts = graphql(`
-query GetAllPosts($limit: Int) {
+const getRecentPosts = graphql(`
+query GetPosts($limit: Int) {
   posts(sort: "publishedAt:DESC", pagination: { limit: $limit }) {
     data {
       id
@@ -24,6 +25,7 @@ query GetAllPosts($limit: Int) {
                   attributes {
                     url
                     name
+                    formats
                   }
                 }
               }
@@ -49,7 +51,7 @@ query GetAllPosts($limit: Int) {
 
 export const getStaticProps = async () => {
   const client = createApolloClient();
-  const { data } = await client.query({ query: getAllRecentPosts, variables: { limit: 10 } });
+  const { data } = await client.query({ query: getRecentPosts, variables: { limit: 10 } });
 
   let serializedPosts = await Promise.all(data.posts!.data.map(async (post) => {
     const mdxSource = await serialize(post.attributes!.content!);
@@ -88,6 +90,9 @@ export const BlogPage = ({ posts }: { posts: PostProps[] }) => {
           })
         }
       </ul>
+      <div>
+        <Link href="/blog/archive"> Older posts...</Link>
+      </div>
     </div>
   );
 };
