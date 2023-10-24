@@ -9,6 +9,11 @@
 }
 .navContainer h1 {
   flex-basis: 1;
+  margin-right: 7px;
+
+}
+.navContainer p {
+  font-size: 17px
 }
 /* .filler {
   width: 70px;

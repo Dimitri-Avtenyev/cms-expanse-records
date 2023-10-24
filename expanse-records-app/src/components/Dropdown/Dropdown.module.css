@@ -7,14 +7,19 @@
 .content {
   position: absolute;
   z-index: 1;
-  padding: 5px;
-  margin-left: 10px;
   background-color: #04090f;
-  border-radius: 5px;
-
+  padding-bottom: 5px;
+  
 }
 .container li {
   list-style-type: none;
+  text-align: left;
+  margin-left: 5px;
+}
+.container ul {
+  width: auto;
+  margin-right: 5px;
+  text-wrap: nowrap;
 }
 
 .menu {
