@@ -54,12 +54,12 @@ export const getStaticProps = async () => {
   const { data } = await client.query({ query: getRecentPosts, variables: { limit: 10 } });
 
   let serializedPosts = await Promise.all(data.posts!.data.map(async (post) => {
-    const mdxSource = await serialize(post.attributes!.content!);
+    const mdxSource = await serialize(post.attributes?.content!);
     
     return {
       id: post.id,
-      author: post.attributes?.author?.data,
       attributes: {
+        author: post.attributes?.author?.data,
         title: post.attributes?.title,
         publishedAt: post.attributes?.publishedAt,
         content: mdxSource,
@@ -89,10 +89,11 @@ export const BlogPage = ({ posts }: { posts: PostProps[] }) => {
             )
           })
         }
-      </ul>
-      <div>
-        <Link href="/blog/archive"> Older posts...</Link>
+            <div>
+        <Link href="/blog/archive"> <button>Explore older posts</button></Link>
       </div>
+      </ul>
+  
     </div>
   );
 };

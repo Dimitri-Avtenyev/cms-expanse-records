@@ -55,10 +55,10 @@ const DisplayCard = ({ season, episode, post }: { season?: SeasonProps, episode?
         </h1>
         <div className={styles.cardMetaData}>
           <div className={styles.avatarContainer}>
-            <img src={post.author.attributes.image.data.attributes.formats.thumbnail.url}></img>
+            <img src={post.attributes.author.attributes.image.data.attributes.formats.thumbnail.url}></img>
           </div>
-          <Link href={`/profile/${post.author.id}`}>
-            <p>{post.author.attributes.firstname} {post.author.attributes.lastname.substring(0, 1)}. </p>
+          <Link href={`/profile/${post.attributes.author.id}`}>
+            <p>{post.attributes.author.attributes.firstname} {post.attributes.author.attributes.lastname.substring(0, 1)}. </p>
           </Link>| {post.attributes.publishedAt.split("T")[0]}
         </div>
         <img

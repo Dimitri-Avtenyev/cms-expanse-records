@@ -24,12 +24,6 @@
     "shortbio": {
       "type": "string"
     },
-    "posts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::post.post",
-      "mappedBy": "author"
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -40,6 +34,12 @@
         "videos",
         "audios"
       ]
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "author"
     }
   }
 }

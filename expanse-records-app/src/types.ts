@@ -43,8 +43,8 @@ interface Episode {
 
 interface Post {
   id: number;
-  author:Author;
   attributes: {
+    author:Author;
     title: string;
     publishedAt: string;
     content: MDXRemoteSerializeResult;
@@ -53,8 +53,8 @@ interface Post {
 }
 interface PostShort {
   id: number;
-  author:Author;
   attributes: {
+    author:Author;
     title: string;
     publishedAt: string;
     image: Image

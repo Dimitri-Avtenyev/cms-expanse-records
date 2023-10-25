@@ -17,6 +17,7 @@ const Dropdown = ({ paths }: { paths: LinkProps[] }) => {
   }, [hovered])
   const handleClick = () => {
     setOpen(!open);
+
   }
   return (
     <div className={styles.container} >

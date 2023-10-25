@@ -20,9 +20,10 @@ export const getStaticProps = async ({params}:{params:{year:string}}) => {
   const {data} = await client.query({query: GetAllPostsYear, variables: { } });
   
   const years:string[] = data.posts!.data.map(post => {
-    return post.attributes?.publishedAt.substring(0,4);
+    let year:string = post.attributes?.publishedAt.substring(0,4);
+    return year;
   });
-const uniqueYears:string[] = years.filter((year, index) => years.indexOf(year) === index);
+  const uniqueYears:string[] = years.filter((year, index) => years.indexOf(year) === index);
 
   return {
     props: {

@@ -693,12 +693,12 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
     lastname: Attribute.String;
     email: Attribute.String;
     shortbio: Attribute.String;
+    image: Attribute.Media;
     posts: Attribute.Relation<
       'api::author.author',
       'oneToMany',
       'api::post.post'
     >;
-    image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

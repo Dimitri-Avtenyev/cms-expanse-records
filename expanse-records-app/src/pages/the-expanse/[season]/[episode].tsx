@@ -117,7 +117,7 @@ const Episode = ({ season, episode }: { season: string, episode: EpisodeProps })
       <Link
         href={{ pathname: `/the-expanse/[season]`, query: { season: season } }}
       >
-        <span>Back</span>
+       <button>Back</button>
       </Link>
     </div>
   );
