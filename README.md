@@ -5,5 +5,6 @@ The project combines the power of Strapi for content management and Next.js for 
 
 
 ## Deployment 🚀
+- [expanse-records-app](https://https://expanse-records.vercel.app) @vercel 
 - [cms-expanse](https://cms-expanse.onrender.com)  @render 
-- [expanse-records-app](https://#) @vercel 
+
