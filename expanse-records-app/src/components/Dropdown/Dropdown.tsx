@@ -33,6 +33,9 @@ const Dropdown = ({ paths }: { paths: LinkProps[] }) => {
               if (path.href === "/") {
                 name = "/Home";
               }
+              if(path.href === "/the-expanse/characters") {
+                name = "/Characters"
+              }
               return (
                 <li key={index} className={`${protomoleculeFont.className}`}>
                   <Link href={path.href} onClick={() => setOpen(false)}>{name}</Link>

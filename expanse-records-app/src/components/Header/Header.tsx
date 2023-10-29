@@ -5,7 +5,7 @@ import { protomoleculeFont } from "@/pages";
 
 const Header = () => {
   const paths:LinkProps[] = [
-    {href: "/"}, {href: "/blog"}, {href: "/the-expanse"}
+    {href: "/"}, {href: "/blog"}, {href: "/the-expanse"}, {href: "/the-expanse/characters"}
   ];
 
   return (

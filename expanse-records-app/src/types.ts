@@ -100,11 +100,19 @@ interface Image {
     };
   };
 }
-
+interface Character {
+  id: number; 
+  attributes: {
+    name: string;
+    bio: string;
+    image: Image
+  }
+}
 export type {
   Author,
   Season,
   Episode,
   Post,
-  PostShort
+  PostShort,
+  Character
 }
