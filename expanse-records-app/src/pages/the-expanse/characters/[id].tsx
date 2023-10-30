@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const GetAllCharacterIds = graphql(`
 query GetAllCharacterIds {
-  characters {
+  characters(pagination:{limit: 50}) {
     data {
       id
     }

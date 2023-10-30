@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const GetAllCharacters = graphql(`
 query GetAllCharacters {
-  characters {
+  characters(pagination:{limit: 50}) {
     data {
       id
       attributes {

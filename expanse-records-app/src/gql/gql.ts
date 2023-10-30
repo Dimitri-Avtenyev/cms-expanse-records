@@ -21,9 +21,9 @@ const documents = {
     "\nquery GetSeasonsWithEpisodes  {\n  seasons(sort:\"id\") {\n    data {\n      id\n      attributes {\n        episodes {\n          data {\n            attributes {\n              title\n              air_date\n              synopsis\n              episodeNum\n              episodeId\n              image {\n                data {\n                  id\n                  attributes {\n                    url\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n": types.GetSeasonsWithEpisodesDocument,
     "\nquery GetAllSeasonIds {\n  seasons (sort:\"id\"){data{id}} \n}\n\n": types.GetAllSeasonIdsDocument,
     "\nquery GetEpisodesForSeasonID($id: ID) {\n  season(id: $id) {\n    data {\n      attributes {\n        episodes {\n          data {\n            attributes {\n              title\n              air_date\n              synopsis\n              episodeNum\n              episodeId\n              image {\n                data {\n                  id\n                  attributes {\n                    url\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\n": types.GetEpisodesForSeasonIdDocument,
-    "\nquery GetAllCharacterIds {\n  characters {\n    data {\n      id\n    }\n  }\n}\n": types.GetAllCharacterIdsDocument,
+    "\nquery GetAllCharacterIds {\n  characters(pagination:{limit: 50}) {\n    data {\n      id\n    }\n  }\n}\n": types.GetAllCharacterIdsDocument,
     "\nquery GetCharacter($id: ID) {\n  character(id: $id) {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n": types.GetCharacterDocument,
-    "\nquery GetAllCharacters {\n  characters {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n": types.GetAllCharactersDocument,
+    "\nquery GetAllCharacters {\n  characters(pagination:{limit: 50}) {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n": types.GetAllCharactersDocument,
     "\nquery GetAllSeasons {\n  seasons(sort:\"id\") {\n    data {\n      attributes {\n        title\n        createdAt\n        updatedAt\n        publishedAt\n        synopsis\n        metacriticRating\n        image {\n          data {\n            id\n            attributes {\n              url\n              name\n            }\n          }\n        }\n      }\n    }\n  }\n  episodes {\n    data {\n      id\n      attributes {\n        title\n        air_date\n        synopsis\n        createdAt\n        updatedAt\n        publishedAt\n        episodeNum\n        episodeId\n      }\n    }\n  }\n}\n\n": types.GetAllSeasonsDocument,
 };
 
@@ -76,7 +76,7 @@ export function graphql(source: "\nquery GetEpisodesForSeasonID($id: ID) {\n  se
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery GetAllCharacterIds {\n  characters {\n    data {\n      id\n    }\n  }\n}\n"): (typeof documents)["\nquery GetAllCharacterIds {\n  characters {\n    data {\n      id\n    }\n  }\n}\n"];
+export function graphql(source: "\nquery GetAllCharacterIds {\n  characters(pagination:{limit: 50}) {\n    data {\n      id\n    }\n  }\n}\n"): (typeof documents)["\nquery GetAllCharacterIds {\n  characters(pagination:{limit: 50}) {\n    data {\n      id\n    }\n  }\n}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -84,7 +84,7 @@ export function graphql(source: "\nquery GetCharacter($id: ID) {\n  character(id
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\nquery GetAllCharacters {\n  characters {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetAllCharacters {\n  characters {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"];
+export function graphql(source: "\nquery GetAllCharacters {\n  characters(pagination:{limit: 50}) {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"): (typeof documents)["\nquery GetAllCharacters {\n  characters(pagination:{limit: 50}) {\n    data {\n      id\n      attributes {\n        name\n        bio\n        image {\n          data {\n            attributes {\n              url\n              name\n              formats\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

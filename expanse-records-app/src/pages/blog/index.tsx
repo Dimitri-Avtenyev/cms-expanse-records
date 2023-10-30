@@ -5,6 +5,7 @@ import createApolloClient from "@/apollo-client";
 import DisplayCard from "@/components/DisplayCard/DisplayCard";
 import { serialize } from "next-mdx-remote/serialize";
 import Link from "next/link";
+import BackToTop from "@/components/BackToTop/BackToTop";
 
 const getRecentPosts = graphql(`
 query GetPosts($limit: Int) {
@@ -89,9 +90,10 @@ export const BlogPage = ({ posts }: { posts: PostProps[] }) => {
             )
           })
         }
-            <div>
+      <div>
         <Link href="/blog/archive"> <button>Explore older posts</button></Link>
       </div>
+      <BackToTop/>
       </ul>
   
     </div>
