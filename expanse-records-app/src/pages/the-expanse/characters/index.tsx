@@ -44,7 +44,7 @@ const CharactersPage = ({characters}:{characters:CharacterProps[]}) => {
 
   return (
     <div className={styles.container}>
-      <h1 style={{textAlign:"center"}}>Pivotal Characters</h1>
+      <h2>Pivotal Characters</h2>
       <ul>
         {
           characters.map((character) => {

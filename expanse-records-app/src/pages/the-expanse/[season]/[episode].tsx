@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import  styles from "@/styles/the-expanse.module.css";
 import { Episode as EpisodeProps } from "@/types";
 import DisplayCard from "@/components/DisplayCard/DisplayCard";
 import createApolloClient from "@/apollo-client";
@@ -110,7 +110,7 @@ export const getStaticProps = async ({ params }: { params: { season: string, epi
 const Episode = ({ season, episode }: { season: string, episode: EpisodeProps }) => {
 
   return (
-    <div >
+    <div className={styles.container}>
       <h1>Season {season.slice(1)} </h1>
       <h2>Episode {episode.attributes.episodeNum}</h2>
       <DisplayCard episode={episode} />

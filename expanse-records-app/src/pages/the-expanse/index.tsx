@@ -76,6 +76,7 @@ const Seasons = ({ seasons }: { seasons: SeasonProps[] }) => {
 
   return (
     <div className={styles.container}>
+      <h2>Expanse portal</h2>
       <ul>
         {
           seasons.map((season: SeasonProps, index: number) => {

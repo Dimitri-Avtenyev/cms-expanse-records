@@ -81,7 +81,7 @@ const Episodes = ({ episodes }: { episodes: EpisodeProps[] }) => {
           episodes.map((episode: EpisodeProps, index: number) => {
             return (
               <li key={index}>
-              <Link style={{color: "inherit"}} href={{ pathname: `/the-expanse/[season]/${episode.attributes.episodeNum}`, query: { season: router.query.season } }}>Episode {index + 1}
+              <Link style={{color: "inherit"}} href={{ pathname: `/the-expanse/[season]/${episode.attributes.episodeNum}`, query: { season: router.query.season } }}><p>Episode {index + 1}</p>
                 <DisplayCard episode={episode} />
               </Link>
               </li>
