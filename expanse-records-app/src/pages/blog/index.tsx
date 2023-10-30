@@ -93,9 +93,10 @@ export const BlogPage = ({ posts }: { posts: PostProps[] }) => {
       <div>
         <Link href="/blog/archive"> <button>Explore older posts</button></Link>
       </div>
-      <BackToTop/>
       </ul>
-  
+      <div className={styles.backtotop}>
+        <BackToTop />
+      </div>
     </div>
   );
 };

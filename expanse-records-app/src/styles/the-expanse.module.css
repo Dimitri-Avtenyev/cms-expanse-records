@@ -4,3 +4,10 @@
 .container h1, .container h2 {
   text-align: center;
 }
+.backtotop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: sticky;
+  bottom: 10px;
+}
