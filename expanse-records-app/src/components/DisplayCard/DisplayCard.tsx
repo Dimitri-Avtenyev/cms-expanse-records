@@ -2,13 +2,14 @@ import { Season as SeasonProps } from "@/types";
 import { Episode as EpisodeProps } from "@/types";
 import { Post as PostProps } from "@/types";
 import { Character as CharacterProps } from "@/types";
+import { Author as AuthorProps } from "@/types";
 import styles from "./DisplayCard.module.css"
 import { protomoleculeFont } from "@/pages";
 import { MDXRemote } from "next-mdx-remote";
 import Link from "next/link";
 
 //DisplayCard
-const DisplayCard = ({ season, episode, post, character }: { season?: SeasonProps, episode?: EpisodeProps, post?: PostProps, character?: CharacterProps }) => {
+const DisplayCard = ({ season, episode, post, character, author }: { season?: SeasonProps, episode?: EpisodeProps, post?: PostProps, character?: CharacterProps, author?:AuthorProps }) => {
 
   if (season) {
     return (
@@ -84,6 +85,21 @@ const DisplayCard = ({ season, episode, post, character }: { season?: SeasonProp
         />
         <div className={styles.cardcontent}>
           {character.attributes.bio}
+        </div>
+      </div>
+    );
+  } else if (author) {
+    return (
+      <div className={styles.card}>
+        <h1 className={`${styles.cardtitle} ${protomoleculeFont.className}`}>
+          {author.attributes.firstname} {author.attributes.lastname.substring(0, 1)}
+        </h1>
+        <img
+          src={author.attributes.image.data.attributes.url}
+          alt={author.attributes.image.data.attributes.name}
+        />
+        <div className={styles.cardcontent}>
+          {author.attributes.shortbio}
         </div>
       </div>
     );
