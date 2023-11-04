@@ -65,7 +65,7 @@ export const getStaticProps = async ({ params }: { params: { year: string } }) =
   const client = createApolloClient();
   const { data } = await client.query({ query: GetAllYearPosts, variables: {} });
 
-  const yearPosts = data.posts?.data.filter(post => post.attributes?.publishedAt.substring(0, 4) === params.year)
+  const yearPosts = data.posts?.data.filter(post => post.attributes?.publishedAt.substring(0, 4) === params.year);
   return {
     props: {
       posts: yearPosts,
@@ -82,7 +82,7 @@ const ArchivePostsPage = ({ posts, year }: { posts: PostShortProps[], year:strin
           return (
             <li key={post.id}>
               <Link href={{ pathname: `/blog/archive/[year]/[id]`, query: {year: year, id:post.id} }}>
-                <p>{post.attributes.title}</p>
+                <p><b>{post.attributes.publishedAt.substring(0, 9)}</b> {post.attributes.title}</p>
               </Link>
 
             </li>

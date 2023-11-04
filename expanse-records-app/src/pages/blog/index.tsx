@@ -52,7 +52,7 @@ query GetPosts($limit: Int) {
 
 export const getStaticProps = async () => {
   const client = createApolloClient();
-  const { data } = await client.query({ query: getRecentPosts, variables: { limit: 10 } });
+  const { data } = await client.query({ query: getRecentPosts, variables: { limit: 3 } }); // most recent -> limit:3
 
   let serializedPosts = await Promise.all(data.posts!.data.map(async (post) => {
     const mdxSource = await serialize(post.attributes?.content!);
